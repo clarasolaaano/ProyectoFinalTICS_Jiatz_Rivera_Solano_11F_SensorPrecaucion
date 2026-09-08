@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyecto IRTRA - Circuito Arduino</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --fondo: #14101c;
+    --panel: #1e1830;
+    --linea: #382c52;
+    --texto: #f1e9fb;
+    --texto-suave: #b4a4cf;
+    --acento: #ff7eb3;
+    --acento-2: #ffd27a;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html,body{
+    margin:0;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: 'Space Grotesk', Arial, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  /* Fondo con líneas tipo circuito */
+  body{
+    background-image:
+      linear-gradient(var(--linea) 1px, transparent 1px),
+      linear-gradient(90deg, var(--linea) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-attachment: fixed;
+  }
+
+  header{
+    padding: 70px 20px 50px;
+    text-align: center;
+    border-bottom: 1px solid var(--linea);
+    position: relative;
+  }
+
+  header .etiqueta{
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--acento);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  header h1{
+    font-size: 2.4rem;
+    margin: 10px 0 0;
+    background: linear-gradient(90deg, var(--acento), var(--acento-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  header p.desc{
+    color: var(--texto-suave);
+    max-width: 600px;
+    margin: 15px auto 0;
+    font-size: 0.95rem;
+  }
+
+  nav{
+    display:flex;
+    justify-content:center;
+    gap: 25px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+  }
+
+  nav a{
+    color: var(--texto-suave);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+    border: 1px solid var(--linea);
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: 0.2s;
+  }
+
+  nav a:hover{
+    color: var(--fondo);
+    background: var(--acento);
+    border-color: var(--acento);
+  }
+
+  main{
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  /* Espacio reservado para multimedia (imagen, video o pdf) */
+  .espacio-evidencia{
+    margin-top: 15px;
+    min-height: 180px;
+    border: 2px dashed var(--linea);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--texto-suave);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 15px;
+    background: rgba(255,255,255,0.02);
+  }
+
+  /* Cuando se agregue contenido real, reemplazar el div .espacio-evidencia
+     por el tag correspondiente, por ejemplo:
+     <img src="Recursos/img/foto.jpg" alt="descripcion">
+     <video controls><source src="Recursos/video/clip.mp4" type="video/mp4"></video>
+     <iframe src="Recursos/pdf/archivo.pdf"></iframe>
+  */
+
+  img.evidencia, video.evidencia, iframe.evidencia{
+    width: 100%;
+    max-height: 480px;
+    border-radius: 10px;
+    border: 1px solid var(--linea);
+    margin-top: 15px;
+    background: #000;
+  }
+
+  /* Cuadrícula de entregables (podcast, documento, infografía, circuito) */
+  .cuadricula{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-bottom: 50px;
+  }
+
+  .cuadrito{
+    background: var(--panel);
+    border: 1px solid var(--linea);
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cuadrito .cabecera{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .cuadrito .numero{
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 2px solid var(--acento);
+    color: var(--acento);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+  }
+
+  .cuadrito .icono{
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--acento);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .cuadrito h3{
+    margin: 0 0 6px;
+    color: var(--texto);
+    font-size: 1.1rem;
+  }
+
+  .cuadrito p{
+    color: var(--texto-suave);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .cuadrito .espacio-evidencia{
+    min-height: 140px;
+  }
+
+  /* Espacio para audio del podcast */
+  audio.evidencia{
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  @media (max-width: 650px){
+    .cuadricula{ grid-template-columns: 1fr; }
+  }
+
+  footer{
+    border-top: 1px solid var(--linea);
+    padding: 30px 20px;
+    text-align: center;
+    color: var(--texto-suave);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+  }
+
+  footer span{
+    color: var(--acento);
+  }
+
+  @media (max-width: 600px){
+    header h1{ font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="etiqueta">// Proyecto de tecnología</div>
+  <h1>Circuito Arduino - IRTRA Petapa</h1>
+  <p class="desc">
+    <!-- ESPACIO: escribe aquí una breve descripción del proyecto -->
+    Descripción breve del proyecto y su objetivo dentro de la clase.
+  </p>
+
+  <nav>
+    <a href="#podcast">Podcast</a>
+    <a href="#documento">Documento</a>
+    <a href="#infografia">Infografía</a>
+    <a href="#circuito">Circuito</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="cuadricula" id="entregables">
+
+    <div class="cuadrito" id="podcast">
+      <div class="cabecera">
+        <span class="numero">1</span>
+        <span class="icono">Podcast</span>
+      </div>
+      <h3>Título del podcast</h3>
+      <p><!-- ESPACIO: breve descripción del podcast --></p>
+      <div class="espacio-evidencia">
+        Espacio para el audio
+      </div>
+      <!-- Cuando tengas el archivo, reemplaza el div de arriba por:
+        <audio class="evidencia" controls>
+          <source src="Recursos/audio/podcast.mp3" type="audio/mpeg">
+        </audio>
+      -->
+    </div>
+
+    <div class="cuadrito" id="documento">
+      <div class="cabecera">
+        <span class="numero">2</span>
+        <span class="icono">Documento</span>
+      </div>
+      <h3>Título del documento</h3>
+      <p><!-- ESPACIO: breve descripción del documento --></p>
+      <div class="espacio-evidencia">
+        Espacio para el PDF
+      </div>
+      <!-- Reemplazar por:
+        <iframe class="evidencia" src="Recursos/pdf/documento.pdf" height="400px"></iframe>
+      -->
+    </div>
+
+    <div class="cuadrito" id="infografia">
+      <div class="cabecera">
+        <span class="numero">3</span>
+        <span class="icono">Infografía</span>
+      </div>
+      <h3>Título de la infografía</h3>
+      <p><!-- ESPACIO: breve descripción de la infografía --></p>
+      <div class="espacio-evidencia">
+        Espacio para la imagen
+      </div>
+      <!-- Reemplazar por:
+        <img class="evidencia" src="Recursos/img/infografia.jpg" alt="Infografía">
+      -->
+    </div>
+
+    <div class="cuadrito" id="circuito">
+      <div class="cabecera">
+        <span class="numero">4</span>
+        <span class="icono">Circuito</span>
+      </div>
+      <h3>Título del circuito</h3>
+      <p><!-- ESPACIO: breve descripción del circuito --></p>
+      <div class="espacio-evidencia">
+        Espacio para foto o video
+      </div>
+      <!-- Reemplazar por:
+        <img class="evidencia" src="Recursos/img/circuito.jpg" alt="Circuito">
+        o
+        <video class="evidencia" controls>
+          <source src="Recursos/video/circuito.mp4" type="video/mp4">
+        </video>
+      -->
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <span>@</span> usuario_del_repositorio
+</footer>
+
+</body>
+</html>
