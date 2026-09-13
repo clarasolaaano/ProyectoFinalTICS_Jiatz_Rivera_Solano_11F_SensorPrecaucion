@@ -25,6 +25,10 @@
     --celeste-fuerte: #6ec6e0;
     --verde: #d9f2d1;
     --verde-fuerte: #8fd694;
+    --morado: #e2d4f8;
+    --morado-fuerte: #b38add;
+    --naranja: #ffdfd3;
+    --naranja-fuerte: #ff9aa2;
   }
 
   *{ box-sizing: border-box; }
@@ -34,6 +38,7 @@
     background: var(--fondo);
     color: var(--texto);
     font-family: 'Quicksand', Arial, sans-serif;
+    scroll-behavior: smooth;
   }
 
   header{
@@ -177,10 +182,14 @@
     z-index: 1;
   }
 
+  /* Colores de los globos */
   #podcast .globo{ background: var(--rosa); }
   #documento .globo{ background: var(--celeste); }
   #infografia .globo{ background: var(--amarillo); }
-  #circuito .globo{ background: var(--verde); }
+  #tinkercad .globo{ background: var(--verde); }
+  #collage .globo{ background: var(--morado); }
+  #circuito-irl .globo{ background: var(--naranja); }
+  #agradecimientos .globo{ background: var(--rosa); }
 
   .parada .tarjeta{
     background: #fff;
@@ -198,10 +207,14 @@
     letter-spacing: 1px;
   }
 
+  /* Colores de las etiquetas */
   #podcast .etiqueta-tipo{ color: var(--rosa-fuerte); }
   #documento .etiqueta-tipo{ color: var(--celeste-fuerte); }
   #infografia .etiqueta-tipo{ color: var(--amarillo-fuerte); }
-  #circuito .etiqueta-tipo{ color: var(--verde-fuerte); }
+  #tinkercad .etiqueta-tipo{ color: var(--verde-fuerte); }
+  #collage .etiqueta-tipo{ color: var(--morado-fuerte); }
+  #circuito-irl .etiqueta-tipo{ color: var(--naranja-fuerte); }
+  #agradecimientos .etiqueta-tipo{ color: var(--rosa-fuerte); }
 
   .parada h3{
     font-family: 'Baloo 2', sans-serif;
@@ -217,7 +230,7 @@
   }
 
   .espacio-evidencia{
-    min-height: 140px;
+    min-height: 100px;
     border: 2px dashed #ecdfd8;
     border-radius: 16px;
     display: flex;
@@ -239,6 +252,35 @@
 
   audio.evidencia{ max-height: none; }
 
+  /* Estilos para el Collage de Imágenes */
+  .grid-collage {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+  }
+
+  .grid-collage img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.2s;
+  }
+
+  .grid-collage img:hover {
+    transform: scale(1.04);
+  }
+
+  /* Badge para el Punto Extra */
+  .badge-extra {
+    background: var(--naranja-fuerte);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    margin-left: 6px;
+  }
+
   @media (max-width: 560px){
     .parada{ gap: 14px; }
     .parada .globo{ width: 54px; height: 54px; font-size: 1.3rem; }
@@ -259,7 +301,6 @@
   <div class="emoji-grande">🎡</div>
   <h1>ProxiGuard</h1>
   <p class="desc">
-    <!-- ESPACIO: escribe aquí una breve descripción del proyecto -->
     Sensor de distancia que avisa cuando alguien llega al límite de seguridad en la atracción Tifón de IRTRA Petapa.
   </p>
 
@@ -269,70 +310,106 @@
     <a href="#podcast">🎙️ Podcast</a>
     <a href="#documento">📄 Documento</a>
     <a href="#infografia">🖼️ Infografía</a>
-    <a href="#circuito">⚡ Circuito</a>
+    <a href="#tinkercad">💻 Tinkercad</a>
+    <a href="#collage">📸 Fotos</a>
+    <a href="#circuito-irl">⚡ Circuito IRL</a>
+    <a href="#agradecimientos">💖 Agradecimientos</a>
   </nav>
 </header>
 
 <main>
   <div class="lista" id="recorrido">
 
+    <!-- APARTADO 1: PODCAST -->
     <div class="parada" id="podcast">
       <div class="globo">🎙️</div>
       <div class="tarjeta">
-        <span class="etiqueta-tipo">Podcast</span>
-        <h3>Título del podcast</h3>
-        <p><!-- ESPACIO: breve descripción del podcast --></p>
-        <div class="espacio-evidencia">Espacio para el audio</div>
-        <!-- Reemplazar por:
-          <audio class="evidencia" controls>
-            <source src="Recursos/audio/podcast.mp3" type="audio/mpeg">
-          </audio>
-        -->
+        <span class="etiqueta-tipo">Apartado 1 • Podcast</span>
+        <h3>Podcast sobre ProxiGuard</h3>
+        <p>Escucha la explicación detallada de nuestro proyecto, los desafíos que tuvimos y la solución propuesta para la atracción Tifón.</p>
+        <audio class="evidencia" controls>
+          <source src="podcast.mp3" type="audio/mpeg">
+        </audio>
       </div>
     </div>
 
+    <!-- APARTADO 2: DOCUMENTO -->
     <div class="parada" id="documento">
       <div class="globo">📄</div>
       <div class="tarjeta">
-        <span class="etiqueta-tipo">Documento</span>
+        <span class="etiqueta-tipo">Apartado 2 • Documento</span>
         <h3>Documento PROXIGUARD</h3>
-        <p><!-- ESPACIO: breve descripción del documento --></p>
-        <div class="espacio-evidencia">PROXIGUARD.pdf</div>
+        <p>Consulta toda la investigación, diseño del prototipo y documentación técnica del sistema de seguridad.</p>
         <iframe class="evidencia" src="PROXIGUARD.pdf" height="400px"></iframe>
-        <!-- Reemplazar por:
-          <iframe class="evidencia" src="Recursos/pdf/documento.pdf" height="400px"></iframe>
-        -->
       </div>
     </div>
 
+    <!-- APARTADO 3: INFOGRAFÍA -->
     <div class="parada" id="infografia">
       <div class="globo">🖼️</div>
       <div class="tarjeta">
-        <span class="etiqueta-tipo">Infografía</span>
-        <h3>PROXIGUARD info </h3>
-        <p><!-- ESPACIO: breve descripción de la infografía --></p>
-        <div class="espacio-evidencia"><img class="evidencia" src="Infografía.jpg" alt="Info"></div>
-
+        <span class="etiqueta-tipo">Apartado 3 • Infografía</span>
+        <h3>PROXIGUARD Info</h3>
+        <p>Resumen visual explicativo sobre el funcionamiento del sensor ultrasónico y sus alertas de proximidad.</p>
+        <div class="espacio-evidencia">
+          <img class="evidencia" src="Infografía.jpg" alt="Infografía de ProxiGuard">
+        </div>
       </div>
     </div>
 
-    <div class="parada" id="circuito">
+    <!-- APARTADO 4: VIDEO DE CIRCUITO EN TINKERCAD -->
+    <div class="parada" id="tinkercad">
+      <div class="globo">💻</div>
+      <div class="tarjeta">
+        <span class="etiqueta-tipo">Apartado 4 • Simulación</span>
+        <h3>Video de Circuito en Tinkercad</h3>
+        <p>Demostración y simulación virtual del circuito, conexiones de componentes y lógica del código Arduino.</p>
+        <div class="espacio-evidencia">
+          <video class="evidencia" controls>
+            <source src="PROXIGUARD.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <!-- APARTADO 5: COLLAGE DE IMÁGENES -->
+    <div class="parada" id="collage">
+      <div class="globo">📸</div>
+      <div class="tarjeta">
+        <span class="etiqueta-tipo">Apartado 5 • Galería</span>
+        <h3>Collage del Proceso</h3>
+        <p>Imágenes del proceso de armado, pruebas del circuito y trabajo en equipo.</p>
+        <div class="grid-collage">
+          <img src="foto1.jpg" alt="Proceso 1" onerror="this.src='foto 1 pg.jpeg">
+          <img src="foto2.jpg" alt="Proceso 2" onerror="this.src='foto 2 pg.jpeg">
+          <img src="foto3.jpg" alt="Proceso 3" onerror="this.src='foto 3 pg.jpeg">
+          <img src="foto4.jpg" alt="Proceso 4" onerror="this.src='foto 4 pg.jpeg">
+        </div>
+      </div>
+    </div>
+
+    <!-- APARTADO 6: VIDEO DE CIRCUITO IRL -->
+    <div class="parada" id="circuito-irl">
       <div class="globo">⚡</div>
       <div class="tarjeta">
-        <span class="etiqueta-tipo">Circuito</span>
-        <h3>Circuito en Tinker Card y en Físico</h3>
-        <p><!-- ESPACIO: breve descripción del circuito --></p>
-        <div class="espacio-evidencia"><video class="evidencia" controls>
-            <source src="PROXIGUARD.mp4"type="video/mp4">
-           <img class="evidencia" src="Recursos/img/circuito.jpg" alt="Circuito">
-          </video></div>
-        <!-- Reemplazar por:
-          <img class="evidencia" src="Recursos/img/circuito.jpg" alt="Circuito">
-          o
+        <span class="etiqueta-tipo">Apartado 6 • Físico <span class="badge-extra">+1 Punto Extra</span></span>
+        <h3>Video del Circuito IRL (En la Vida Real)</h3>
+        <p>Demostración del circuito armado físicamente con Arduino, sensor ultrasónico y alertas sonoras/luminosas funcionando en tiempo real.</p>
+        <div class="espacio-evidencia">
           <video class="evidencia" controls>
-            <source src="Recursos/video/circuito.mp4" type="video/mp4">
+            <source src="proxiguard irl.mp4" type="video/mp4">
           </video>
-        -->
+        </div>
+      </div>
+    </div>
+
+    <!-- APARTADO 7: AGRADECIMIENTOS -->
+    <div class="parada" id="agradecimientos">
+      <div class="globo">💖</div>
+      <div class="tarjeta">
+        <span class="etiqueta-tipo">Agradecimientos</span>
+        <h3>¡Gracias por acompañarnos!</h3>
+        <p>Queremos agradecer a nuestros profesores, compañeros y al personal de apoyo por guiarnos durante la elaboración de este proyecto. Su apoyo técnico y retroalimentación fueron fundamentales para hacer de <strong>ProxiGuard</strong> una realidad.</p>
       </div>
     </div>
 
