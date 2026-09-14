@@ -243,32 +243,32 @@
     background: #fffaf5;
   }
 
-  img.evidencia, video.evidencia, iframe.evidencia, audio.evidencia{
+  img.evidencia, video.evidencia, iframe.evidencia{
     width: 100%;
     max-height: 440px;
     border-radius: 16px;
     border: none;
   }
 
-  audio.evidencia{ max-height: none; }
-
-  /* Estilos para el Collage de Imágenes */
-  .grid-collage {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 10px;
+  /* Estilos ajustados para Infografía Vertical Larga */
+  .espacio-infografia {
+    min-height: 100px;
+    border: 2px dashed #ecdfd8;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: #fffaf5;
   }
 
-  .grid-collage img {
+  img.evidencia-infografia {
     width: 100%;
-    height: 130px;
-    object-fit: cover;
+    max-width: 480px; /* Controla que no se haga excesivamente ancha */
+    height: auto;
+    max-height: 1200px; /* Permite desplegarla completa de forma vertical */
     border-radius: 12px;
-    transition: transform 0.2s;
-  }
-
-  .grid-collage img:hover {
-    transform: scale(1.04);
+    object-fit: contain;
   }
 
   /* Badge para el Punto Extra */
@@ -307,7 +307,7 @@
   <a href="#recorrido" class="cta">Ver el proyecto 🚀</a>
 
   <nav>
-    <a href="#podcast">🎙️ Podcast</a>
+    <a href="#podcast">🎙️ Podcast Video</a>
     <a href="#documento">📄 Documento</a>
     <a href="#infografia">🖼️ Infografía</a>
     <a href="#tinkercad">💻 Tinkercad</a>
@@ -320,16 +320,19 @@
 <main>
   <div class="lista" id="recorrido">
 
-    <!-- APARTADO 1: PODCAST -->
+    <!-- APARTADO 1: PODCAST (Cambiado a Video) -->
     <div class="parada" id="podcast">
       <div class="globo">🎙️</div>
       <div class="tarjeta">
-        <span class="etiqueta-tipo">Apartado 1 • Podcast</span>
+        <span class="etiqueta-tipo">Apartado 1 • Podcast (Video)</span>
         <h3>Podcast sobre ProxiGuard</h3>
-        <p>Escucha la explicación detallada de nuestro proyecto, los desafíos que tuvimos y la solución propuesta para la atracción Tifón.</p>
-        <audio class="evidencia" controls>
-          <source src="podcast.mp3" type="audio/mpeg">
-        </audio>
+        <p>Escucha y mira la explicación detallada de nuestro proyecto, los desafíos que tuvimos y la solución propuesta para la atracción Tifón.</p>
+        <div class="espacio-evidencia">
+          <video class="evidencia" controls>
+            <source src="Podcast.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+          </video>
+        </div>
       </div>
     </div>
 
@@ -344,15 +347,15 @@
       </div>
     </div>
 
-    <!-- APARTADO 3: INFOGRAFÍA -->
+    <!-- APARTADO 3: INFOGRAFÍA (Ajustada larga y estilizada) -->
     <div class="parada" id="infografia">
       <div class="globo">🖼️</div>
       <div class="tarjeta">
         <span class="etiqueta-tipo">Apartado 3 • Infografía</span>
         <h3>PROXIGUARD Info</h3>
         <p>Resumen visual explicativo sobre el funcionamiento del sensor ultrasónico y sus alertas de proximidad.</p>
-        <div class="espacio-evidencia">
-          <img class="evidencia-larga" src="Infografía.jpg" alt="Infografía de ProxiGuard">
+        <div class="espacio-infografia">
+          <img class="evidencia-infografia" src="Infografía.jpg" alt="Infografía de ProxiGuard">
         </div>
       </div>
     </div>
